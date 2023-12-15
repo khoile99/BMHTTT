@@ -4,12 +4,6 @@ include 'components/connect.php';
 
 session_start();
 
-if (isset($_SESSION['user_id'])) {
-   $user_id = $_SESSION['user_id'];
-} else {
-   $user_id = '';
-};
-
 include 'components/add_cart.php';
 
 ?>
@@ -49,7 +43,7 @@ include 'components/add_cart.php';
                <div class="content">
                   <span>order online</span>
                   <h3>delicious pizza</h3>
-                  <a href="menu.html" class="btn">see menus</a>
+                  <a href="#" class="btn">see products</a>
                </div>
                <div class="image">
                   <img src="images/home-img-1.png" alt="">
@@ -60,7 +54,7 @@ include 'components/add_cart.php';
                <div class="content">
                   <span>order online</span>
                   <h3>chezzy hamburger</h3>
-                  <a href="menu.html" class="btn">see menus</a>
+                  <a href="#" class="btn">see products</a>
                </div>
                <div class="image">
                   <img src="images/home-img-2.png" alt="">
@@ -71,7 +65,7 @@ include 'components/add_cart.php';
                <div class="content">
                   <span>order online</span>
                   <h3>rosted chicken</h3>
-                  <a href="menu.html" class="btn">see menus</a>
+                  <a href="#" class="btn">see products</a>
                </div>
                <div class="image">
                   <img src="images/home-img-3.png" alt="">
@@ -92,22 +86,22 @@ include 'components/add_cart.php';
 
       <div class="box-container">
 
-         <a href="category.php?category=fast food" class="box">
+         <a href="#" class="box">
             <img src="images/cat-1.png" alt="">
             <h3>fast food</h3>
          </a>
 
-         <a href="category.php?category=main dish" class="box">
+         <a href="#" class="box">
             <img src="images/cat-2.png" alt="">
             <h3>main dishes</h3>
          </a>
 
-         <a href="category.php?category=drinks" class="box">
+         <a href="#" class="box">
             <img src="images/cat-3.png" alt="">
             <h3>drinks</h3>
          </a>
 
-         <a href="category.php?category=desserts" class="box">
+         <a href="#" class="box">
             <img src="images/cat-4.png" alt="">
             <h3>desserts</h3>
          </a>
