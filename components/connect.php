@@ -2,7 +2,7 @@
 error_reporting(E_ERROR | E_PARSE);
 function connect_orc($user_name = "Shop", $password = "shop")
 {
-    $url = "bmhttt.cwxb69gela3k.ap-northeast-1.rds.amazonaws.com";
+    $url = "bmhttt1.cwxb69gela3k.ap-northeast-1.rds.amazonaws.com";
     $port = 1521;
     $service_name = "SHOP";
 
