@@ -26,7 +26,24 @@ $row = oci_fetch_object($stid);
 
 if (isset($_POST['submit'])) {
     $address = $_POST['address'];
-    $address = filter_var($name, 513);
+    $address = filter_var($address, 513);
+    $number = $_POST['number'];
+    $number = filter_var($number, 513);
+    $status = $_POST['status'];
+    $status = filter_var($status, 513);
+
+    $product = $_POST['product'];
+    $query = "SELECT PRICE FROM SHOP.PRODUCTS WHERE NAME='$product'";
+    $stid = oci_parse($conn, $query);
+    oci_execute($stid, OCI_DEFAULT);
+    $row = oci_fetch_object($stid);
+    $total_price = $row->PRICE * $number;
+
+    $query = "UPDATE SHOP.ORDERS SET TOTAL_PRICES=$total_price, \"NUMBER\"=$number, ADDRESS='$address', STATUS='$status'  WHERE ID = $order_id";
+    $stid = oci_parse($conn, $query);
+    oci_execute($stid);
+
+    header("location: order.php?id=$order_id");
 }
 
 ?>
@@ -58,14 +75,18 @@ if (isset($_POST['submit'])) {
 
         <form action="" method="post">
             <h3>update order</h3>
-            <input type="text" name="customer" placeholder="Customer" class="box" maxlength="50" value="<?= $row->CUSTOMER_NAME ?>">
-            <input type="text" name="product" placeholder="Product" class="box" maxlength="50" value="<?= $row->PRODUCT_NAME ?>">
-            <input type="text" name="branch" placeholder="Branch" class="box" maxlength="50" value="<?= $row->BRANCH_NAME ?>">
+            <input type="text" name="customer" placeholder="Customer" class="box" maxlength="50" value="<?= $row->CUSTOMER_NAME ?>" disabled>
+            <input type="text" name="product" placeholder="Product" class="box" maxlength="50" value="<?= $row->PRODUCT_NAME ?>" readonly>
+            <input type="text" name="branch" placeholder="Branch" class="box" maxlength="50" value="<?= $row->BRANCH_NAME ?>" disabled>
             <input type="number" name="number" placeholder="Number" class="box" maxlength="50" value=<?= $row->NUMBER ?>>
-            <input type="number" name="total_price" placeholder="Total Price" class="box" maxlength="50" value=<?= $row->TOTAL_PRICES ?>>
-            <input type="text" name="staff" placeholder="Staff" class="box" maxlength="50" value="<?= $row->STAFF_NAME ?>">
+            <input type="number" name="total_price" placeholder="Total Price" class="box" maxlength="50" value=<?= $row->TOTAL_PRICES ?> disabled>
+            <input type="text" name="staff" placeholder="Staff" class="box" maxlength="50" value="<?= $row->STAFF_NAME ?>" disabled>
             <input type="text" name="address" placeholder="Address" class="box" value="<?= strval($row->ADDRESS) ?>">
-            <input type="text" name="date" placeholder="Date" class="box" value="<?= $row->DATE_CREATED ?>">
+            <input type="text" name="date" placeholder="Date" class="box" value="<?= $row->DATE_CREATED ?>" disabled>
+            <select name="status" class="box">
+                <option value=T1 <?php if ($row->STATUS == "T1") echo "selected" ?>>New</option>
+                <option value=T2 <?php if ($row->STATUS == "T2") echo "selected" ?>>Received</option>
+            </select>
             <input type="submit" value="update now" name="submit" class="btn">
         </form>
 
