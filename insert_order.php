@@ -39,7 +39,7 @@ if (isset($_POST['submit'])) {
     $branch_id = $row->BRANCH_ID;
     $staff_id = $row->ID;
 
-    $query = "INSERT INTO SHOP.ORDERS (TOTAL_PRICES, \"NUMBER\",ADDRESS, BRANCH_ID, STAFF_ID, PRODUCT_ID, CUSTOMER_ID) VALUES($total_price, $number, $address, $branch_id, $staff_id, $product, $customer)";
+    $query = "INSERT INTO SHOP.ORDERS (TOTAL_PRICES, \"NUMBER\",ADDRESS, BRANCH_ID, STAFF_ID, PRODUCT_ID, CUSTOMER_ID) VALUES($total_price, $number, '$address', $branch_id, $staff_id, $product, $customer)";
     $stid = oci_parse($conn, $query);
     oci_execute($stid);
 }
