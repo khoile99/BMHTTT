@@ -53,7 +53,7 @@ if (isset($_SESSION['user_name'])) {
             echo '<p class="empty">please login to see your orders</p>';
          } else {
             $conn = connect_orc($user_name, $password);
-            $query = "SELECT DATE_CREATED, TOTAL_PRICES, \"NUMBER\", ADDRESS, b.NAME as BRANCH_NAME, s.USERNAME as STAFF_NAME, p.NAME as PRODUCT_NAME, c.USERNAME as CUSTOMER_NAME, STATUS FROM SHOP.ORDERS o
+            $query = "SELECT o.id, DATE_CREATED, TOTAL_PRICES, \"NUMBER\", ADDRESS, b.NAME as BRANCH_NAME, s.USERNAME as STAFF_NAME, p.NAME as PRODUCT_NAME, c.USERNAME as CUSTOMER_NAME, STATUS FROM SHOP.ORDERS o
             LEFT JOIN (SELECT ID, NAME FROM SHOP.BRANCHES) b ON b.ID=o.BRANCH_ID
             LEFT JOIN (SELECT ID, USERNAME FROM SHOP.STAFF) s ON s.ID=o.STAFF_ID
             LEFT JOIN (SELECT ID, NAME FROM SHOP.PRODUCTS) p ON p.ID=o.PRODUCT_ID
@@ -82,6 +82,7 @@ if (isset($_SESSION['user_name'])) {
                                                                } else {
                                                                   echo 'Received';
                                                                }; ?></span> </p>
+                     <a type="button" class="btn" href="order.php?id=<?= $row->ID ?>">EDIT</a>
                   </div>
          <?php
                }
@@ -92,6 +93,7 @@ if (isset($_SESSION['user_name'])) {
          ?>
 
       </div>
+      <div class="box"><a type="button" class="btn" href="insert_order.php">+</a></div>
 
    </section>
 
